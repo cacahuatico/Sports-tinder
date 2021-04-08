@@ -2,7 +2,7 @@ package org.academiadecodigo.cachealots.sports.model;
 
 import java.util.List;
 
-public class Sports{
+public class Sports extends AbstractModel{
 
     private Integer id;
     private String name;

@@ -1,5 +1,6 @@
 package org.academiadecodigo.cachealots.sports.services;
 
+import org.academiadecodigo.cachealots.sports.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -21,11 +22,11 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * @see UserService#get(Integer)
+     * @see UserService#get(String)
      */
     @Override
-    public User get(Integer id) {
-        return userMap.get(id);
+    public User get(String email) {
+        return userMap.values().stream().filter(user -> user.getEmail()==email).findFirst().get();
     }
 
     /**

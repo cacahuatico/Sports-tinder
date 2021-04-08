@@ -1,6 +1,6 @@
 package org.academiadecodigo.cachealots.sports.model;
 
-public class Friend{
+public class Friend extends AbstractModel{
 
     private String name;
 

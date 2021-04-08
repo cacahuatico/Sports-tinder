@@ -1,5 +1,7 @@
 package org.academiadecodigo.cachealots.sports.services;
 
+import org.academiadecodigo.cachealots.sports.model.User;
+
 import java.util.List;
 
 /**
@@ -10,10 +12,10 @@ public interface UserService {
     /**
      * Gets the customer
      *
-     * @param id the customer id
+     * @param  email the customer id
      * @return the customer with the given id
      */
-     User get(Integer id);
+     User get(String email);
 
 
     /**

@@ -1,9 +1,13 @@
 package org.academiadecodigo.cachealots.sports.services;
 
 
+import org.academiadecodigo.cachealots.sports.model.User;
+import org.springframework.stereotype.Service;
+
 /**
  * An {@link AuthService} implementation
  */
+@Service
 public class AuthServiceImpl implements AuthService {
 
     private UserService UserService;
@@ -19,13 +23,14 @@ public class AuthServiceImpl implements AuthService {
     }
 
     /**
-     * @see AuthService#authenticate(Integer)
+     * @see AuthService#authenticate(String email,String password)
      */
     @Override
-    public boolean authenticate(Integer id) {
-
-        accessingUser = UserService.get(id);
-        return accessingUser != null;
+    public boolean authenticate(String email,String password) {
+        accessingUser = UserService.get(email);
+        if (accessingUser==null){return false;}
+        if (accessingUser.getPassword()!=password){return false;}
+        return true;
     }
 
     /**
