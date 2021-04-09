@@ -2,6 +2,7 @@ package org.academiadecodigo.cachealots.sports.services;
 
 
 import org.academiadecodigo.cachealots.sports.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    private UserService UserService;
+    private UserService userService;
     private User accessingUser;
 
     /**
@@ -18,18 +19,19 @@ public class AuthServiceImpl implements AuthService {
      *
      * @param userService the customer service to set
      */
+    @Autowired
     public void setUserService(UserService userService) {
-        this.UserService = userService;
+        this.userService = userService;
     }
 
     /**
-     * @see AuthService#authenticate(String email,String password)
+     * @see AuthService#authenticate(String email, String password)
      */
     @Override
-    public boolean authenticate(String email,String password) {
-        accessingUser = UserService.get(email);
-        if (accessingUser==null){return false;}
-        if (accessingUser.getPassword()!=password){return false;}
+    public boolean authenticate(String email, String password) {
+        accessingUser = userService.get(email);
+        if (accessingUser == null){return false;}
+        if (!accessingUser.getPassword().equals(password)){return false;}
         return true;
     }
 

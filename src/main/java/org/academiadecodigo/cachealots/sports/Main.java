@@ -12,8 +12,11 @@ public class Main {
     public static void main(String[] args) {
         User rui = new User();
         rui.setAge(24);
+        rui.setEmail("1");
         UserServiceImpl userService = new UserServiceImpl();
         userService.add(rui);
+
+        System.out.println(userService.get("1").getId());
 
     }
 

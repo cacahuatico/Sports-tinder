@@ -1,24 +1,56 @@
 package org.academiadecodigo.cachealots.sports.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 public class User extends AbstractModel{
 
+
+    @NotNull(message = "First name is mandatory")
+    @NotBlank(message = "First name is mandatory")
+    @Size(min = 3, max = 64)
     private String firstName;
+
+    @NotNull(message = "First name is mandatory")
+    @NotBlank(message = "First name is mandatory")
+    @Size(min = 3, max = 64)
     private String lastName;
-    private Integer age;
-    private City cityId;
+
+    @Email
+    @NotBlank(message = "Email is mandatory")
     private String email;
+
+    //@NotNull(message = "Age is mandatory")
+    //@NotBlank(message = "Age is mandatory")
+    private Integer age;
+    //@NotNull(message = "City is mandatory")
+    //@NotBlank(message = "City is mandatory")
+    private String city;
+
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @NotNull(message = "Password is mandatory")
+    @NotBlank(message = "Password is mandatory")
+    @Size(min = 3, max = 64)
     private String password;
-
+    @JsonFormat(with = JsonFormat.Feature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED)
     private List<Sports> sportsList;
-    private List<Friend> friendsList;
+    @JsonIgnore
+    private List<User> friendsList;
 
-    public List<Friend> getFriendsList() {
+
+    public List<User> getFriendsList() {
         return friendsList;
     }
 
-    public void setFriendsList(List<Friend> friendsList) {
+    public void setFriendsList(List<User> friendsList) {
         this.friendsList = friendsList;
     }
 
@@ -47,12 +79,12 @@ public class User extends AbstractModel{
         this.age = age;
     }
 
-    public City getCityId() {
-        return cityId;
+    public String getCity() {
+        return city;
     }
 
-    public void setCityId(City cityId) {
-        this.cityId = cityId;
+    public void setCityId(String city) {
+        this.city = city;
     }
 
     public String getEmail() {

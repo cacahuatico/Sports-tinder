@@ -26,7 +26,18 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User get(String email) {
-        return userMap.values().stream().filter(user -> user.getEmail()==email).findFirst().get();
+
+        Optional<User> user1 = userMap.values().stream().filter(user -> user.getEmail().equals(email)).findFirst();
+        if (user1.isPresent()){
+            return user1.get();
+        }
+        return null;
+    }
+
+    public User getById(Integer id) {
+
+
+        return userMap.get(id);
     }
 
     /**
@@ -47,7 +58,17 @@ public class UserServiceImpl implements UserService {
         if (user.getId() == null) {
             user.setId(getNextId());
         }
+        System.out.println(getNextId());
 
+        System.out.println(user.getId());
         userMap.put(user.getId(), user);
     }
+
+    public void addFriend(Integer idCustomer,Integer idFriend){
+       List<User> userList= userMap.get(idCustomer).getFriendsList()==null? new LinkedList<>(): userMap.get(idCustomer).getFriendsList();
+
+       userList.add(userMap.get(idFriend));
+       userMap.get(idCustomer).setFriendsList(userList);
+    }
+
 }
